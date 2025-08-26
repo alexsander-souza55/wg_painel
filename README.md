@@ -94,9 +94,3 @@ Desenvolvido por Alexsander Souza
 🔗 [LinkedIn](https://www.linkedin.com/in/alexsander-souza55/)
 
 
----
-
-👉 Esse modelo já está **pronto para colar** no seu `README.md`.  
-Deixa seu projeto com cara de profissional e organizado.
-
-Quer que eu também prepare um **`requirements.txt` básico só com Flask e libs comuns** (pra você já subir junto com o README)?
