@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="{{ url_for('static', filename='icone.png') }}" type="image/jpeg">
+    <title>WireGuard Painel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<style>
+    body {
+        background: linear-gradient(to top, rgba(255,255,255,0.3), rgba(148, 148, 148, 0.6));
+        position: relative;
+        overflow-x: hidden;
+    }
+    .mirror-effect {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background: linear-gradient(to top, rgba(255,255,255,0.3), rgba(211,211,211,0.6));
+        transform: scaleY(-1);
+        opacity: 0.2;
+        z-index: 0;
+    }
+    .container {
+        position: relative;
+        z-index: 1;
+    }
+</style>
+
+<body class="container mt-5">
+    <div class="mirror-effect"></div>
+    <div class="container">
+        <h1>Clientes WireGuard - WPA Sistemas</h1>
+
+        <!-- Formulário de Adição -->
+        <form method="POST" action="/add" class="mb-4">
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <input type="text" name="name" class="form-control" placeholder="Nome do cliente" required>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary" type="submit">Adicionar</button>
+                    <button class="btn btn-primary" onclick="window.location.href='/grupos'">Grupos</button> <!--Botao para redirecionar para o template grupo-->
+                    
+                </div>
+            </div>
+        </form>
+
+        <!-- Status dos Peers -->
+        {% if wg_status_error %}
+            <div class="alert alert-danger mt-4" role="alert">
+                Erro ao carregar status do WireGuard.
+            </div>
+        {% else %}
+            <h2 class="mt-5">Status dos Peers</h2>
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Public Key</th>
+                        <th>Endpoint</th>
+                        <th>Allowed IPs</th>
+                        <th>Último Handshake</th>
+                        <th>Recebido</th>
+                        <th>Enviado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for peer in peers %}
+                    <tr>
+                        <td>{{ peer.name or "(desconhecido)" }}</td>
+                        <td><code>{{ peer.public_key }}</code></td>
+                        <td>{{ peer.endpoint or "Nenhum" }}</td>
+                        <td>{{ peer.allowed_ips }}</td>
+                        <td>{{ peer.latest_handshake }}</td>
+                        <td>{{ peer.rx }}</td>
+                        <td>{{ peer.tx }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>

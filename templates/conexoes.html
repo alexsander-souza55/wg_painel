@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conexões - {{ client.name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+    <h2>Conexão de {{ client.name }}</h2>
+    <ul class="list-group mb-4">
+        <li class="list-group-item"><strong>IP real:</strong> {{ client.ip_real }}</li>
+        <li class="list-group-item"><strong>IP local:</strong> {{ client.ip_local }}</li>
+        <li class="list-group-item text-success"><strong>Upload:</strong> {{ client.tx }} MB</li>
+        <li class="list-group-item text-primary"><strong>Download:</strong> {{ client.rx }} MB</li>
+    </ul>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Voltar</a>
+</body>
+</html>

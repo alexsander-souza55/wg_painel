@@ -1,0 +1,23 @@
+<form method="get" action="{{ url_for('buscar') }}">
+  <input type="text" name="q" placeholder="Buscar...">
+  <button type="submit">Buscar</button>
+</form>
+
+<h3>Resultados para "{{ termo }}"</h3>
+<h4>Clientes</h4>
+<ul>
+  {% for cliente in clientes %}
+    <li>{{ cliente.name }} (Grupo: {{ cliente.group.name }})</li>
+  {% else %}
+    <li>Nenhum cliente encontrado.</li>
+  {% endfor %}
+</ul>
+
+<h4>Grupos</h4>
+<ul>
+  {% for grupo in grupos %}
+    <li>{{ grupo.name }}</li>
+  {% else %}
+    <li>Nenhum grupo encontrado.</li>
+  {% endfor %}
+</ul>

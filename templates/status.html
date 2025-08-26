@@ -1,0 +1,34 @@
+<h1>Painel de Conexões WireGuard</h1>
+
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>IP Real</th>
+            <th>IP Local</th>
+            <th>Último Handshake</th>
+            <th>Status</th>
+            <th>RX (MB)</th>
+            <th>TX (MB)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in clients %}
+        <tr>
+            <td>{{ client.name }}</td>
+            <td>{{ client.ip_real }}</td>
+            <td>{{ client.ip_local }}</td>
+            <td>{{ client.ultimo_handshake }}</td>
+            <td>
+                {% if client.status == "Conectado" %}
+                    <span style="color:green;">🟢 Conectado</span>
+                {% else %}
+                    <span style="color:red;">🔴 Desconectado</span>
+                {% endif %}
+            </td>
+            <td>{{ client.rx }}</td>
+            <td>{{ client.tx }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

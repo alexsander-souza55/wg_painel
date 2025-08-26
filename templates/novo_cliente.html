@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Cliente</title>
+</head>
+<body>
+    <h1>Criar Novo Cliente</h1>
+      <form method="post">
+          <label for="name">Nome do Cliente:</label><br>
+          <input type="text" id="name" name="name" required><br><br>
+
+          <label for="grupo_id">Selecionar Grupo:</label><br>
+          <input type="number" id="group_id" name="group_id" required><br><br>
+
+         <!--- <select name="grupo_id" id="grupo_id" required>
+              <option value="">-- Selecione um grupo --</option>
+              {% for grupo in grupos %}
+                  <option value="{{ grupo.id }}">{{ grupo.name }}</option>  
+              {% endfor %}
+          </select><br><br> -->
+
+          <button type="submit">Criar Cliente</button>
+      </form>
+
+</body>
+</html>

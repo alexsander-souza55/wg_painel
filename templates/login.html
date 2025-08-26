@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - WireGuard WPA</title>
+  <link rel="icon" href="{{ url_for('static', filename='icone.png') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to bottom, #002c5d, #111927);
+      font-family: 'Quicksand', sans-serif;
+      color: #fff;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center; /* centraliza horizontal */
+      align-items: center;     /* centraliza vertical */
+    }
+
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-text {
+      font-size: 48px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .logo-text span {
+      color: #4aa1ff;
+    }
+
+    .logo-img {
+      margin-bottom: 30px;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 350px;
+      padding: 30px;
+      background-color: #1c2333;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 93%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background-color: #0062ff;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0047c7;
+    }
+
+    .error-messages {
+      margin-top: 20px;
+      color: #ff6b6b;
+      font-size: 14px;
+    }
+
+    .error-messages p {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <div class="logo-img">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" width="80">
+    </div>
+
+    <div class="logo-text">W<span>i</span>reG<span>u</span>ard</div>
+
+    <div class="form-container">
+      <form method="post">
+        <input type="text" name="username" placeholder="Usuário" required>
+        <input type="password" name="password" placeholder="Senha" required>
+        <button type="submit">Entrar</button>
+      </form>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="error-messages">
+            {% for category, message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+</body>
+
+</html>

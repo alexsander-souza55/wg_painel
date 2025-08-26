@@ -1,0 +1,25 @@
+# Ambiente virtual
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Banco/dados locais
+*.db
+*.sqlite3
+*.json
+
+# Configurações locais
+config.conf
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs e backups
+*.log
+*.bak
+*.swp
+*.tmp   

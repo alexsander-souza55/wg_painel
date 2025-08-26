@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Grupos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #toast-container {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1055;
+        }
+    </style>
+</head>
+<body class="container py-4">
+    <h1 class="mb-4">Grupos Cadastrados</h1>
+
+    <!-- Botões superiores -->
+    <div class="mb-3">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">← Voltar para Home</a>
+        <a href="{{ url_for('novo_grupo') }}" class="btn btn-primary">+ Criar Novo Grupo</a>
+    </div>
+
+    <!-- Toasts container -->
+    <div id="toast-container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="toast align-items-center text-bg-{{ 'danger' if category == 'error' else category }} border-0 mb-2 show" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="d-flex">
+                <div class="toast-body">{{ message }}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+
+    {% if grupos %}
+        <p>Total de Grupos: {{ grupos|length }}</p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for grupo in grupos %}
+                <tr>
+                    <td>{{ grupo.id }}</td>
+                    <td>{{ grupo.name }}</td>
+                    <td>
+                        <a href="{{ url_for('listar_clientes_por_grupo', grupo_id=grupo.id) }}" class="btn btn-primary btn-sm">Ver Clientes</a>
+                        <a href="{{ url_for('novo_cliente', grupo_id=grupo.id) }}" class="btn btn-success btn-sm">Novo Cliente</a>
+                        <a href="{{ url_for('editar_grupo', grupo_id=grupo.id) }}" class="btn btn-warning btn-sm">Editar Grupo</a>
+                        <form action="{{ url_for('apagar_grupo', grupo_id=grupo.id) }}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Tem certeza que deseja apagar o grupo {{ grupo.name }}?')">
+                                Apagar Grupo
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">Nenhum grupo encontrado.</div>
+    {% endif %}
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

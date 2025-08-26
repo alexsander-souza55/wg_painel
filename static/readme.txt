@@ -1,0 +1,1 @@
+Diretorio destinado a arquivos de imagem dos templates.

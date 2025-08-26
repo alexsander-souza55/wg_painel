@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{{ url_for('static', filename='icone.png') }}" type="image/png">
+    <title>Dashboard - WireGuard WPA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to top, rgba(255,255,255,0.3), rgba(148, 148, 148, 0.6));
+        }
+        .mirror-effect {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(255,255,255,0.3), rgba(211,211,211,0.6));
+            transform: scaleY(-1);
+            opacity: 0.2;
+            z-index: 0;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="container py-4">
+    <div class="mirror-effect"></div>
+
+    <h1 class="mb-4">Dashboard - WireGuard WPA Sistemas</h1>
+
+    <!-- Cartões de status -->
+    <div class="row text-center mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white shadow">
+                <div class="card-body">
+                    <h5>Total de Peers</h5>
+                    <h3>{{ total_peers }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white shadow">
+                <div class="card-body">
+                    <h5>Peers Conectados</h5>
+                    <h3>{{ peers_conectados }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger text-white shadow">
+                <div class="card-body">
+                    <h5>Peers Desconectados</h5>
+                    <h3>{{ peers_desconectados }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-dark text-white shadow">
+                <div class="card-body">
+                    <h5>Total de Grupos</h5>
+                    <h3>{{ total_grupos }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mensagem de boas-vindas -->
+    <div class="alert alert-info">
+        <h4 class="alert-heading">Bem-vindo, {{ session.get('user', 'Usuário') }}!</h4>
+        <p>Esta é a sua dashboard do WireGuard WPA Sistemas. Aqui você pode gerenciar seus peers e grupos.</p>
+    </div>          
+
+    <!-- Botões administrativos -->
+    <div class="mb-4">
+        <a href="{{ url_for('novo_grupo') }}" class="btn btn-outline-primary me-2">+ Criar Grupo</a>
+        <a href="{{ url_for('novo_usuario') }}" class="btn btn-outline-success me-2">+ Criar Usuário</a>
+        <a href="{{ url_for('listar_grupos') }}" class="btn btn-outline-dark me-2">Gerenciar Grupos</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-outline-danger me-2">Logout</a>
+    </div>
+
+    <!-- Status dos Peers -->
+    {% if wg_status_error %}
+        <div class="alert alert-danger">Erro ao carregar status do WireGuard.</div>
+    {% else %}
+        <h2>Status dos Peers</h2>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nome</th>
+                    <th>Public Key</th>
+                    <th>Endpoint</th>
+                    <th>Allowed IPs</th>
+                    <th>Último Handshake</th>
+                    <th>Recebido</th>
+                    <th>Enviado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for peer in peers %}
+                <tr>
+                    <td>{{ peer.name or "(desconhecido)" }}</td>
+                    <td><code>{{ peer.public_key }}</code></td>
+                    <td>{{ peer.endpoint or "Nenhum" }}</td>
+                    <td>{{ peer.allowed_ips }}</td>
+                    <td>{{ peer.latest_handshake }}</td>
+                    <td>{{ peer.rx }}</td>
+                    <td>{{ peer.tx }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</body>
+</html>
