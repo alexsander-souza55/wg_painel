@@ -90,8 +90,9 @@ wg_painel/
 👨‍💻 Autor
 
 Desenvolvido por Alexsander Souza
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/alexsander-souza55)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alexsander-souza55)
+
+**[Alexsander Souza](https://github.com/alexsander-souza55)**  
+🔗 [LinkedIn](https://www.linkedin.com/in/alexsander-souza55/)
 
 
 
