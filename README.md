@@ -33,7 +33,7 @@ Este projeto foi desenvolvido como estudo prático em **Python, Flask, banco de 
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/SEU_USUARIO/wg_painel.git
+git clone https://github.com/alexsander-souza55/wg_painel.git
 cd wg_painel
 
 2. Crie e ative o ambiente virtual
@@ -90,7 +90,7 @@ wg_painel/
 👨‍💻 Autor
 
 Desenvolvido por Alexsander Souza
+
 **[Alexsander Souza](https://github.com/alexsander-souza55)**  
 🔗 [LinkedIn](https://www.linkedin.com/in/alexsander-souza55/)
-
 
